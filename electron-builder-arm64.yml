@@ -1,0 +1,51 @@
+# 文件路径：electron-builder-arm64.yml
+
+appId: ai.opencode.desktop
+productName: OpenCode
+copyright: Copyright © 2024 OpenCode AI
+
+# 构建输出目录
+directories:
+  output: release
+  buildResources: build
+
+# 需要打包的文件
+files:
+  - dist/**/*
+  - "!node_modules/**/*"
+  - package.json
+
+# Windows 特定配置
+win:
+  target:
+    - target: nsis
+      arch:
+        - arm64
+    - target: portable
+      arch:
+        - arm64
+  # 应用图标
+  icon: build/icon.ico
+  # 产物命名格式
+  artifactName: '${productName}-${version}-win-arm64.${ext}'
+
+# NSIS 安装程序配置
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  deleteAppDataOnUninstall: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  installerIcon: build/icon.ico
+  uninstallerIcon: build/icon.ico
+  installerHeaderIcon: build/icon.ico
+
+# Electron 特定配置
+# 注意：确保版本号与 package.json 一致
+electronDist: node_modules/electron/dist
+electronVersion: '33.2.1'
+
+# ARM64 特定元数据
+arm64Metadata:
+  XamlMarkup: false
